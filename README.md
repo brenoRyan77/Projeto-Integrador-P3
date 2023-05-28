@@ -21,71 +21,117 @@ Este documento descreve a API do Projeto Integrador, que fornece operações rel
 - [Gustavo Antônio Lopes Nóbrega]()
 ## Documentação da API
 
-#### Retorna todos os usuários
+## Endpoints
 
-```http
-  GET /api/usuario
-```
+### Listar Usuários
 
-#### Retorna um usuário
+Retorna a lista de usuários cadastrados.
 
-```http
-  GET /api/usuario/${id}
-```
+**Endpoint:** `/api/usuario`
 
-| Parâmetro   | Tipo       | Descrição                                   |
-| :---------- | :--------- | :------------------------------------------ |
-| `id`      | `Long` | **Obrigatório**. O ID do usuário que você quer buscar |
+- Método: GET
+- Tags: Usuário
+- Respostas:
+  - 200: Requisição bem-sucedida. Retorna a lista de usuários.
 
-#### Retorna um usuário
+### Cadastrar Usuário
 
-```http
-  GET /api/usuario/${cpf}
-```
+Cadastra um novo usuário.
 
-| Parâmetro   | Tipo       | Descrição                                   |
-| :---------- | :--------- | :------------------------------------------ |
-| `cpf`      | `String` | **Obrigatório**. O CPF do usuário que você quer buscar |
+**Endpoint:** `/api/usuario`
 
-#### Cadastra um usuário
+- Método: POST
+- Tags: Usuário
+- Corpo da Requisição:
+  - Tipo de mídia: application/json
+  - Esquema: UsuarioDTO (consulte a descrição do esquema abaixo)
+- Respostas:
+  - 200: Requisição bem-sucedida. O usuário foi cadastrado com sucesso.
 
-```http
-  POST /api/usuario
-```
+### Obter Usuário por CPF
 
-| Corpo da requisição   | Tipo       | Descrição                                   |
-| :---------- | :--------- | :------------------------------------------ |
-| `nome`      | `String` | **Obrigatório**.
-| `sobrenome`      | `String` | **Obrigatório**.
-| `email`      | `String` | **Obrigatório**.
-| `cpf`      | `String` | **Obrigatório**.
-| `rg`      | `String` | **Obrigatório**.
-| `telefone`      | `String` | **Obrigatório**.
+Retorna as informações do usuário com o CPF especificado.
 
-#### Altera um usuário
+**Endpoint:** `/api/usuario/{cpf}`
 
-```http
-  PUT /api/usuario/${id}
-```
-| Parâmetro   | Tipo       | Descrição                                   |
-| :---------- | :--------- | :------------------------------------------ |
-| `id`      | `Long` | **Obrigatório**. O ID do usuário que você quer alterar |
+- Método: GET
+- Tags: Usuário
+- Parâmetros:
+  - cpf (obrigatório): CPF do usuário
+- Respostas:
+  - 200: Requisição bem-sucedida. Retorna as informações do usuário.
 
-| Corpo da requisição   | Tipo       | Descrição                                   |
-| :---------- | :--------- | :------------------------------------------ |
-| `nome`      | `String` | **Obrigatório**.
-| `sobrenome`      | `String` | **Obrigatório**.
-| `email`      | `String` | **Obrigatório**.
-| `cpf`      | `String` | **Obrigatório**.
-| `rg`      | `String` | **Obrigatório**.
-| `telefone`      | `String` | **Obrigatório**.
+### Obter Usuário por ID
 
-#### Deleta um usuário
+Retorna as informações do usuário com o ID especificado.
 
-```http
-  DELETE /api/usuario/${id}
-```
+**Endpoint:** `/api/usuario/{id}`
 
-| Parâmetro   | Tipo       | Descrição                                   |
-| :---------- | :--------- | :------------------------------------------ |
-| `id`      | `Long` | **Obrigatório**. O ID do usuário que você quer deletar |
+- Método: GET
+- Tags: Usuário
+- Parâmetros:
+  - id (obrigatório): ID do usuário
+- Respostas:
+  - 200: Requisição bem-sucedida. Retorna as informações do usuário.
+
+### Atualizar Usuário
+
+Atualiza as informações do usuário com o ID especificado.
+
+**Endpoint:** `/api/usuario/{id}`
+
+- Método: PUT
+- Tags: Usuário
+- Parâmetros:
+  - id (obrigatório): ID do usuário
+- Corpo da Requisição:
+  - Tipo de mídia: application/json
+  - Esquema: UsuarioDTO (consulte a descrição do esquema abaixo)
+- Respostas:
+  - 200: Requisição bem-sucedida. As informações do usuário foram atualizadas com sucesso.
+
+### Excluir Usuário
+
+Exclui o usuário com o ID especificado.
+
+**Endpoint:** `/api/usuario/{id}`
+
+- Método: DELETE
+- Tags: Usuário
+- Parâmetros:
+  - id (obrigatório): ID do usuário
+- Respostas:
+  - 200: Requisição bem-sucedida. O usuário foi excluído com sucesso.
+
+## Esquemas de Dados
+
+### UsuarioDTO
+
+O esquema de dados "UsuarioDTO" representa os atributos de um usuário.
+
+Propriedades:
+
+- nome:
+  - Tipo: string
+  - Tamanho máximo: 100 caracteres
+  - Tamanho mínimo: 3 caracteres
+  - Padrão: "^[\\p{L}\\s]+$" (somente letras e espaços)
+- sobrenome:
+  - Tipo: string
+  - Tamanho máximo: 100 caracteres
+  - Tamanho mínimo: 3 caracteres
+  - Padrão: "^[\\p{L}\\s]+$" (somente letras e espaços)
+- email:
+  - Tipo: string
+  - Padrão: \S (qualquer caractere não vazio)
+- cpf:
+  - Tipo: string
+  - Tamanho máximo: 14 caracteres
+  - Padrão: "^[0-9]+$" (somente dígitos numéricos)
+- rg:
+  - Tipo: string
+  - Tamanho máximo: 9 caracteres
+  - Padrão: "^[0-9]+$" (somente dígitos numéricos)
+- telefone:
+  - Tipo: string
+  - Padrão: "^[0-9]+$" (somente dígitos numéricos)
