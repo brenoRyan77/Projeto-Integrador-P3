@@ -21,7 +21,6 @@ Este documento descreve a API do Projeto Integrador, que fornece operações rel
 - [Gustavo Antônio Lopes Nóbrega]()
 ## Documentação da API
 
-## Endpoints
 
 ### Listar Usuários
 
