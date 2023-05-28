@@ -27,10 +27,6 @@ Este documento descreve a API do Projeto Integrador, que fornece operações rel
   GET /api/usuario
 ```
 
-| Parâmetro   | Tipo       | Descrição                           |
-| :---------- | :--------- | :---------------------------------- |
-| `api_key` | `string` | **Obrigatório**. A chave da sua API |
-
 #### Retorna um usuário
 
 ```http
